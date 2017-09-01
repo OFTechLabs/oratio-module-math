@@ -1,5 +1,5 @@
 {
-  "name": "oratio-module-math",
+  "name": "@oratio/module-math",
   "version": "0.0.0",
   "description": "",
   "keywords": [
@@ -23,15 +23,19 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "prebuild": "rimraf dist",
-    "build": "tsc && rollup -c && rimraf compiled && typedoc --out dist/docs --target es6 --theme minimal src",
+    "lint": "tslint -t codeFrame --type-check --project tsconfig.json 'src/**/*.ts' -e 'src/**/*.spec.ts'",
+    "prebuild": "rimraf dist && rimraf generated",
+    "build": "tsc && rollup -c && rimraf compiled && typedoc --out generated/docs --target es6 --theme minimal src",
     "start": "tsc-watch --onSuccess \"rollup -c\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
-    "deploy-docs": "ts-node tools/gh-pages-publish",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls"
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "precommit": "lint-staged",
+    "prepare": "npm run build"
   },
   "jest": {
     "transform": {
@@ -83,6 +87,7 @@
     "validate-commit-msg": "2.14.0"
   },
   "dependencies": {
-    "@oratio/oratio": "0.0.10"
+    "@oratio/oratio": "0.0.10",
+    "mathjs": "3.16.3"
   }
 }
