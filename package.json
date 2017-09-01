@@ -1,0 +1,88 @@
+{
+  "name": "oratio-module-math",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [
+    "oratio",
+    "conversational",
+    "nlp"
+  ],
+  "main": "dist/oratio-module-math.umd.js",
+  "module": "dist/oratio-module-math.es5.js",
+  "typings": "dist/types/oratio-module-math.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "techlabs <techlabs@ortec-finance.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OFTechLabs/oratio-module-math"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "prebuild": "rimraf dist",
+    "build": "tsc && rollup -c && rimraf compiled && typedoc --out dist/docs --target es6 --theme minimal src",
+    "start": "tsc-watch --onSuccess \"rollup -c\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 70,
+        "functions": 70,
+        "lines": 90,
+        "statements": 90
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "20.0.8",
+    "@types/node": "8.0.26",
+    "colors": "1.1.2",
+    "coveralls": "2.13.1",
+    "cross-env": "5.0.5",
+    "jest": "20.0.4",
+    "lodash.camelcase": "4.3.0",
+    "prompt": "1.0.0",
+    "replace-in-file": "2.6.3",
+    "rimraf": "2.6.1",
+    "rollup": "0.49.2",
+    "rollup-plugin-commonjs": "8.2.0",
+    "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-sourcemaps": "0.4.2",
+    "semantic-release": "7.0.2",
+    "ts-jest": "20.0.14",
+    "ts-node": "3.3.0",
+    "tsc-watch": "1.0.8",
+    "tslint": "5.7.0",
+    "tslint-config-prettier": "1.4.0",
+    "tslint-config-standard": "6.0.1",
+    "typedoc": "0.8.0",
+    "typescript": "2.5.2",
+    "validate-commit-msg": "2.14.0"
+  },
+  "dependencies": {
+    "@oratio/oratio": "0.0.10"
+  }
+}
