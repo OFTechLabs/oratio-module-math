@@ -25,7 +25,7 @@ describe('MathJsNeuron', () => {
 
     it('should be able to calculate', () => {
         const inputs = [
-            {input: '(34 * 2) / 2 ', output: '34'},
+            {input: '(34 * 2) / 2', output: '34'},
             {input: '100 + 2', output: '102'},
             {input: '60 / 30', output: '2'},
         ];
